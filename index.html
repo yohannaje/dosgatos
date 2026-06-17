@@ -13,7 +13,7 @@
     :root {
       --bg: #f9f9f9;
       --bg2: #f5f5f5;
-      --ink: #111111;
+      --ink: #31323B;
       --ink2: #555555;
       --ink3: #999999;
       --line: #e5e5e5;
@@ -43,13 +43,8 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 64px;
     }
-    nav .brand { display: flex; align-items: center; gap: 10px; }
+    nav .brand { display: flex; align-items: center; }
     nav .brand img { height: 28px; }
-    nav .brand span {
-      font-family: "Loser TM", serif;
-      font-size: 12px; letter-spacing: 0.04em;
-      text-transform: uppercase; color: var(--ink);
-    }
     nav .links { display: flex; align-items: center; gap: 26px; }
     nav .links a {
       font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
@@ -65,7 +60,7 @@
 
     .sticker {
       display: inline-flex; align-items: center;
-      font-family: "Bootzy TM", sans-serif;
+      font-family: var(--mono);
       font-size: 10px; letter-spacing: 0.06em;
       text-transform: uppercase; padding: 6px 14px;
       border: 1px solid var(--ink); border-radius: 100px;
@@ -88,12 +83,8 @@
     .hero .logo-wrap { margin-bottom: 18px; }
     .hero .logo-wrap img { height: clamp(120px, 22vw, 240px); margin: 0 auto; }
     .hero .subtitle {
-      font-family: var(--serif); font-size: clamp(20px, 2.4vw, 30px);
-      font-style: italic; color: var(--ink2); margin-top: 6px;
-    }
-    .hero .desc {
-      color: var(--ink2); max-width: 50ch; margin-top: 10px;
-      font-size: 14px;
+      font-family: var(--sans); font-size: clamp(20px, 2.4vw, 30px);
+      font-weight: 600; color: var(--blue); margin-top: 6px;
     }
     .hero .tags {
       display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap;
@@ -106,8 +97,8 @@
       text-align: center; margin-bottom: 32px;
     }
     .sec-head h2 {
-      font-family: "Loser TM", serif;
-      font-size: clamp(32px, 4.5vw, 56px); line-height: 0.9;
+      font-family: var(--sans);
+      font-weight: 600; font-size: clamp(32px, 4.5vw, 56px); line-height: 1;
       color: var(--blue);
     }
 
@@ -152,91 +143,223 @@
     .bento .card .meta .price { font-family: var(--mono); font-size: 13px; color: var(--blue); }
     @media (max-width: 800px) { .bento { grid-template-columns: 1fr; } }
 
-    .tools-sec { background: #0f0f0f; color: #fff; text-align: center; }
-    .tools-sec .sec-head h2 { color: #fff; }
-    .tools-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    .tools-sec { border-top: 1px solid var(--line); }
+    .tools-sec .sec-head {
+      text-align: center; padding: clamp(40px, 6vw, 70px) 24px 16px;
+      background: var(--bg);
     }
-    .tool {
-      background: #1a1a1a; border: 1px solid #333; border-radius: 3px;
-      padding: 32px; transition: border-color .2s, transform .2s;
+    .tools-sec .sec-head h2 {
+      font-family: var(--sans); font-weight: 600;
+      font-size: clamp(36px, 5vw, 64px); line-height: 1;
+      color: var(--blue);
     }
-    .tool:hover { border-color: var(--blue); transform: translateY(-4px); }
-    .tool {
-      background: #1a1a1a; border: 1px solid #333; border-radius: 3px;
-      padding: 32px; transition: border-color .2s, transform .2s;
-      display: flex; flex-direction: column;
+    .tools-sec .sec-head .sub {
+      color: var(--ink2); font-size: 15px; margin-top: 8px;
+      max-width: 46ch; margin-left: auto; margin-right: auto;
     }
-    .tool:hover { border-color: var(--blue); transform: translateY(-4px); }
-    .tool .logo {
-      height: 38px; margin-bottom: 28px;
+    .tools-sec .chips {
+      display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+      margin-top: 16px; margin-bottom: 32px;
     }
-    .tool .logo img { height: 100%; width: auto; filter: invert(1) brightness(2); }
-    .tool .showcase {
-      flex: 1;
-      border: 1px solid #333; border-radius: 3px;
-      background: #111; padding: 20px;
-      margin-bottom: 22px;
-      min-height: 140px;
+    .tools-sec .chips span {
+      font-family: var(--mono); font-size: 9px; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--blue);
+      border: 1px solid var(--blue); padding: 5px 12px; border-radius: 100px;
     }
-    .tool p { color: rgba(255,255,255,0.65); font-size: 14px; line-height: 1.55; margin-bottom: 20px; max-width: 46ch; }
-    .tool a {
+
+    .tool-show {
+      padding: clamp(50px, 8vw, 100px) 24px;
+      overflow: hidden;
+    }
+    .tool-show.pz { background: #31323B; color: #fff; }
+    .tool-show.gm { background: var(--blue); color: #fff; }
+    .tool-show .inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+      align-items: center;
+    }
+    .tool-show.gm .inner { direction: rtl; }
+    .tool-show.gm .inner > * { direction: ltr; }
+    @media (max-width: 900px) {
+      .tool-show .inner, .tool-show.gm .inner { grid-template-columns: 1fr; direction: ltr; }
+    }
+    .tool-show .logo {
+      height: clamp(34px, 4vw, 48px); margin-bottom: 14px;
+    }
+    .tool-show .logo img { height: 100%; width: auto; filter: invert(1) brightness(2); }
+    .tool-show p {
+      color: rgba(255,255,255,0.7); font-size: 14px;
+      line-height: 1.6; max-width: 46ch; margin-bottom: 18px;
+    }
+    .tool-show .features {
+      list-style: none; padding: 0; margin: 0 0 24px;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .tool-show .features li {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--mono); font-size: 10px; letter-spacing: 0.06em;
+      text-transform: uppercase; color: rgba(255,255,255,0.8);
+    }
+    .tool-show .features li::before {
+      content: "→"; color: #fff; font-weight: 700; opacity: 0.5;
+    }
+    .tool-show .btn {
       display: inline-flex; align-items: center; gap: 6px;
       font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em;
-      text-transform: uppercase; color: #fff; background: var(--blue);
-      padding: 10px 18px; border-radius: 2px; transition: background .15s;
-      align-self: flex-start;
+      text-transform: uppercase; color: #fff;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 10px 20px; border-radius: 100px;
+      transition: background .15s, border-color .15s;
     }
-    .tool a:hover { background: var(--blue2); }
-    @media (max-width: 700px) { .tools-grid { grid-template-columns: 1fr; } }
+    .tool-show .btn:hover { background: rgba(255,255,255,0.12); border-color: #fff; }
 
-    /* pocket zine mockup */
-    .zine-mock {
-      display: flex; justify-content: center; align-items: center; gap: 8px;
-      height: 100%;
+    /* outlined wireframes */
+    .wf {
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 4px;
+      overflow: hidden;
     }
-    .zine-page {
-      width: 70px; aspect-ratio: 3/4; background: #fff;
-      border: 1px solid #444; border-radius: 2px;
-      padding: 8px; display: flex; flex-direction: column; gap: 5px;
+    .wf-header {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 10px; border-bottom: 1px solid rgba(255,255,255,0.12);
     }
-    .zine-page .line { height: 3px; background: #333; border-radius: 1px; }
-    .zine-page .line.w60 { width: 60%; }
-    .zine-page .img { flex: 1; background: #222; border-radius: 1px; }
+    .wf-header i {
+      width: 7px; height: 7px; border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .wf-header span {
+      font-family: var(--mono); font-size: 7px; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.3); margin-left: 4px;
+    }
 
-    /* gif mockup */
-    .gif-mock {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 10px; height: 100%;
+    /* PZ wireframe */
+    .pz-wf-body {
+      display: grid; grid-template-columns: 34px 130px 1fr;
+      min-height: 240px;
     }
-    .gif-frames {
+    .pz-wf-rail {
+      border-right: 1px solid rgba(255,255,255,0.12);
+      display: flex; flex-direction: column; align-items: center;
+      gap: 9px; padding: 12px 0;
+    }
+    .pz-wf-ico {
+      width: 22px; height: 22px; border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 3px; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: rgba(255,255,255,0.3);
+    }
+    .pz-wf-ico.on { border-color: rgba(255,255,255,0.5); color: #fff; }
+    .pz-wf-tpl {
+      border-right: 1px solid rgba(255,255,255,0.12);
+      padding: 12px 10px; display: flex; flex-direction: column; gap: 9px;
+    }
+    .pz-wf-tpl-head {
+      font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+    .pz-wf-tpl-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 7px;
+    }
+    .wt {
+      aspect-ratio: 4/5; border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 2px; padding: 5px; display: flex; flex-direction: column; gap: 3px;
+    }
+    .wt b { display: block; }
+    .wt .img { background: rgba(255,255,255,0.08); border-radius: 1px; }
+    .wt .ln { height: 2px; background: rgba(255,255,255,0.1); border-radius: 1px; }
+    .wt .ln.s { width: 55%; }
+    .wt-col { display: flex; flex-direction: column; gap: 3px; flex: 1; justify-content: center; }
+    .pz-wf-canvas {
+      position: relative; padding: 16px; display: flex; align-items: center; justify-content: center;
+      background: rgba(255,255,255,0.02);
+    }
+    .pz-wf-spread { display: flex; }
+    .pz-wf-page {
+      width: clamp(60px, 8vw, 90px); aspect-ratio: 3/4;
+      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.15);
+      padding: 10px; display: flex; flex-direction: column; gap: 6px;
+    }
+    .pz-wf-page:first-child { border-right: 1px dashed rgba(255,255,255,0.1); }
+    .pz-wf-page.title { align-items: center; text-align: center; }
+    .wf-img {
+      border: 1px solid rgba(255,255,255,0.12);
+      background:
+        linear-gradient(45deg, transparent calc(50% - 0.5px), rgba(255,255,255,0.08) 50%, transparent calc(50% + 0.5px)),
+        linear-gradient(-45deg, transparent calc(50% - 0.5px), rgba(255,255,255,0.08) 50%, transparent calc(50% + 0.5px));
+    }
+    .wf-line { height: 4px; background: rgba(255,255,255,0.12); border-radius: 2px; display: block; }
+    .wf-line.head { height: 7px; background: rgba(255,255,255,0.25); }
+    .w40 { width: 40%; } .w50 { width: 50%; } .w60 { width: 60%; } .w70 { width: 70%; } .w80 { width: 80%; } .w90 { width: 90%; }
+    .pz-wf-toolbar {
+      position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 4px; padding: 5px;
+      border: 1px solid rgba(255,255,255,0.15); border-radius: 18px;
+    }
+    .wf-dot {
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 9px; color: rgba(255,255,255,0.3);
+    }
+    .wf-dot.solid { background: rgba(255,255,255,0.2); }
+    .pz-wf-film {
+      display: flex; align-items: center; gap: 7px; padding: 9px 11px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .pz-wf-film i {
+      width: 36px; height: 26px; border: 1px solid rgba(255,255,255,0.12); border-radius: 2px;
+      flex: 0 0 auto;
+      background-image: linear-gradient(90deg, transparent calc(50% - 0.5px), rgba(255,255,255,0.1) 50%, transparent calc(50% + 0.5px));
+    }
+    .pz-wf-film i.on { border-color: rgba(255,255,255,0.4); box-shadow: 0 0 0 1px rgba(255,255,255,0.15); }
+    .pz-wf-add {
+      width: 26px; height: 26px; border: 1px dashed rgba(255,255,255,0.15);
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.25); font-size: 12px; flex: 0 0 auto;
+    }
+
+    /* GM wireframe */
+    .gm-wf-body {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      min-height: 200px;
+    }
+    .gm-wf-left {
+      border-right: 1px solid rgba(255,255,255,0.12);
+      padding: 10px; display: flex; flex-direction: column; gap: 8px;
+    }
+    .gm-wf-drop {
+      border: 1px dashed rgba(255,255,255,0.2); border-radius: 3px;
+      padding: 10px; text-align: center;
+      font-family: var(--mono); font-size: 7px; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.3);
+    }
+    .gm-wf-frames {
       display: flex; gap: 4px;
     }
-    .gif-frame {
-      width: 36px; height: 36px; border: 1px solid #444; border-radius: 2px;
+    .gm-wf-frames b {
+      width: 28px; height: 28px; border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 2px; display: flex; align-items: center; justify-content: center;
+      font-size: 8px; color: rgba(255,255,255,0.3); font-weight: 400;
+    }
+    .gm-wf-frames b.on { border-color: rgba(255,255,255,0.5); color: #fff; }
+    .gm-wf-row {
+      height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px;
+    }
+    .gm-wf-right {
       display: flex; align-items: center; justify-content: center;
-      font-family: var(--mono); font-size: 10px; color: #fff;
+      padding: 10px;
     }
-    .gif-frame:nth-child(1) { background: #222; }
-    .gif-frame:nth-child(2) { background: #333; }
-    .gif-frame:nth-child(3) { background: #444; }
-    .gif-frame:nth-child(4) { background: #333; }
-    .gif-bar {
-      width: 160px; height: 4px; background: #333; border-radius: 2px;
-      position: relative; overflow: hidden;
+    .gm-wf-preview {
+      width: 100%; aspect-ratio: 4/3;
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 8px; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.25);
     }
-    .gif-bar::after {
-      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
-      width: 40%; background: var(--blue); animation: load 2s ease-in-out infinite;
-    }
-    @keyframes load { 0%, 100% { left: 0; } 50% { left: 60%; } }
 
     .contact { text-align: center; }
     .contact .logo { margin-bottom: 18px; }
     .contact .logo img { height: 44px; margin: 0 auto; }
     .contact h2 {
-      font-family: "Loser TM", serif;
-      font-size: clamp(36px, 5.5vw, 68px); line-height: 0.9; color: var(--blue);
+      font-family: var(--sans); font-weight: 600;
+      font-size: clamp(36px, 5.5vw, 68px); line-height: 1; color: var(--blue);
     }
     .contact p { color: var(--ink2); max-width: 44ch; margin: 12px auto 24px; font-size: 14px; }
     .contact-links {
@@ -274,8 +397,7 @@
 <nav>
   <div class="inner">
     <a class="brand" href="#top">
-      <img src="dosgatos.png" alt="Dos Gatos" />
-      <span>Dos Gatos Press</span>
+      <img src="logos/dosgatos.svg" alt="Dos Gatos" />
     </a>
     <div class="links">
       <a href="#shop">Tienda</a>
@@ -291,7 +413,6 @@
     <img src="dosgatos.png" alt="Dos Gatos" />
   </div>
   <p class="subtitle r">Independent press de diseño y colaboración</p>
-  <p class="desc r">Hacemos fanzines, stickers, prints y herramientas digitales gratuitas.</p>
   <div class="tags r">
     <span class="sticker blue">Córdoba, España</span>
     <span class="sticker outline">Fanzines</span>
@@ -303,7 +424,7 @@
 <section class="pad manifesto">
   <div class="wrap">
     <pre class="ascii r" id="manifestoBook" role="img" aria-label="Libro animado"></pre>
-    <p class="r">Hacemos cosas en papel. También hacemos <em>herramientas digitales gratuitas</em> para que otros creadores también puedan hacer las suyas. Sin cuentas, sin nube, sin complicaciones.</p>
+    <p class="r">Hacemos cosas en papel. También hacemos <em>herramientas digitales gratuitas</em> para que otros creadores también puedan hacer las suyas.</p>
   </div>
 </section>
 
@@ -338,27 +459,116 @@
   </div>
 </section>
 
-<section class="pad tools-sec" id="tools">
-  <div class="wrap">
-    <div class="sec-head r">
-      <h2>Herramientas</h2>
+<section class="tools-sec" id="tools">
+  <div class="sec-head r">
+    <h2>Herramientas</h2>
+    <p class="sub">Gratuitas, local-first y sin registros. Dos herramientas que hicimos para crear y publicar sin depender de nadie.</p>
+    <div class="chips">
+      <span>Gratis</span>
+      <span>Local-first</span>
+      <span>Sin registros</span>
     </div>
-    <div class="tools-grid">
-      <div class="tool r">
+  </div>
+
+  <div class="tool-show pz r">
+    <div class="inner">
+      <div class="tool-text">
         <div class="logo">
           <img src="logos/pocketzine.svg" alt="Pocket Zine" />
         </div>
-        <h3>Pocket Zine</h3>
-        <p>Editor de fanzines local-first. Sin cuentas, sin nube. Abre el navegador y empieza a maquetar.</p>
-        <a href="https://pocketzineclub.com" target="_blank">Abrir →</a>
+        <p>Editor de fanzines local-first. Diseña y exporta fanzines listos para imprimir desde el navegador. Sin cuentas, sin nube, sin suscripciones.</p>
+        <ul class="features">
+          <li>Maquetación visual</li>
+          <li>PDF booklet automático</li>
+          <li>Imposición de páginas</li>
+          <li>Todo local, sin registros</li>
+        </ul>
+        <a class="btn" href="https://pocketzineclub.com" target="_blank">Abrir Pocket Zine →</a>
       </div>
-      <div class="tool r">
-        <div class="logo">
-          <img src="logos/gifmaker.svg" alt="GIF Maker" />
+      <div class="wf">
+        <div class="wf-header"><i></i><i></i><i></i><span>pocketzineclub.com</span></div>
+        <div class="pz-wf-body">
+          <div class="pz-wf-rail">
+            <span class="pz-wf-ico on">▦</span>
+            <span class="pz-wf-ico">▭</span>
+            <span class="pz-wf-ico">◳</span>
+            <span class="pz-wf-ico">⌗</span>
+          </div>
+          <div class="pz-wf-tpl">
+            <span class="pz-wf-tpl-head">Templates</span>
+            <div class="pz-wf-tpl-grid">
+              <span class="wt"><b class="img" style="height:46%"></b><b class="ln"></b><b class="ln"></b><b class="ln s"></b></span>
+              <span class="wt" style="flex-direction:row;gap:4px"><b class="img" style="flex:1"></b><b class="img" style="flex:1"></b></span>
+              <span class="wt" style="flex-direction:row;gap:4px"><b class="img" style="width:46%"></b><span class="wt-col"><b class="ln"></b><b class="ln"></b><b class="ln s"></b></span></span>
+              <span class="wt"><b class="img" style="flex:1"></b></span>
+              <span class="wt"><b class="ln"></b><b class="ln"></b><b class="ln"></b><b class="ln"></b><b class="ln s"></b></span>
+              <span class="wt"><b class="ln s" style="align-self:center"></b><b class="img" style="height:36%;margin:2px 0"></b><b class="ln"></b></span>
+            </div>
+          </div>
+          <div class="pz-wf-canvas">
+            <div class="pz-wf-spread">
+              <div class="pz-wf-page title">
+                <span class="wf-line head w70"></span>
+                <span class="wf-line head w50"></span>
+                <div class="wf-img" style="width:60%;height:34%;margin:9px 0;"></div>
+                <span class="wf-line w40"></span>
+              </div>
+              <div class="pz-wf-page">
+                <div class="wf-img" style="width:72%;height:38%;align-self:flex-end;"></div>
+                <span class="wf-line w90"></span>
+                <span class="wf-line w90"></span>
+                <span class="wf-line w80"></span>
+                <span class="wf-line w50"></span>
+              </div>
+            </div>
+            <div class="pz-wf-toolbar">
+              <span class="wf-dot solid"></span>
+              <span class="wf-dot">▦</span>
+              <span class="wf-dot">T</span>
+              <span class="wf-dot">▢</span>
+              <span class="wf-dot">✎</span>
+            </div>
+          </div>
         </div>
-        <h3>GIF Maker</h3>
-        <p>Crea GIFs ligeros desde tu navegador. Sube imágenes, ajusta velocidad y calidad, descarga.</p>
-        <a href="https://yohannaje.github.io/gifmaker/" target="_blank">Abrir →</a>
+        <div class="pz-wf-film">
+          <i class="on"></i><i></i><i></i><i></i><i></i><span class="pz-wf-add">+</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-show gm r">
+    <div class="inner">
+      <div class="tool-text">
+        <div class="logo">
+          <img src="logos/gifmaker-outlined.svg" alt="GIF Maker" />
+        </div>
+        <p>Crea GIFs ligeros para web desde tu navegador. Sube imágenes, ajusta velocidad y calidad, y descarga al instante.</p>
+        <ul class="features">
+          <li>Arrastra y reordena frames</li>
+          <li>Control de velocidad y calidad</li>
+          <li>Preview en tiempo real</li>
+          <li>Totalmente local, sin servidores</li>
+        </ul>
+        <a class="btn" href="https://yohannaje.github.io/gifmaker/" target="_blank">Abrir GIF Maker →</a>
+      </div>
+      <div class="wf">
+        <div class="wf-header"><i></i><i></i><i></i><span>gifmaker</span></div>
+        <div class="gm-wf-body">
+          <div class="gm-wf-left">
+            <div class="gm-wf-drop">[+] upload</div>
+            <div class="gm-wf-frames">
+              <b class="on">1</b><b>2</b><b>3</b><b>4</b>
+            </div>
+            <div class="gm-wf-row"></div>
+            <div class="gm-wf-row" style="width:60%"></div>
+            <div class="gm-wf-row"></div>
+            <div class="gm-wf-row" style="width:45%"></div>
+          </div>
+          <div class="gm-wf-right">
+            <div class="gm-wf-preview">preview</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
